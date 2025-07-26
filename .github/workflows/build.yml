@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
     branches:
-      - build  # <-- هذا هو الفرع اللي شغال عليه
+      - build  # الفرع الذي سيتم عليه تنفيذ البيلد
     paths-ignore:
       - '*.md'
 
@@ -15,13 +15,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
+      - name: Checkout source code (src)
+        uses: actions/checkout@v3
         with:
           path: "src"
 
-      - name: Checkout builds
-        uses: actions/checkout@master
+      - name: Checkout builds branch
+        uses: actions/checkout@v3
         with:
           ref: "build"
           path: "builds"
@@ -42,8 +42,8 @@ jobs:
           cd $GITHUB_WORKSPACE/src
           chmod +x gradlew
           ./gradlew make makePluginsJson
-          cp **/build/*.cs3 $GITHUB_WORKSPACE/builds
-          cp build/plugins.json $GITHUB_WORKSPACE/builds
+          cp **/build/*.cs3 $GITHUB_WORKSPACE/builds || true
+          cp build/plugins.json $GITHUB_WORKSPACE/builds || true
 
       - name: Push builds
         run: |
@@ -51,5 +51,5 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add .
-          git commit --amend -m "Build $GITHUB_SHA" || exit 0
+          git commit --amend -m "Build $GITHUB_SHA" || echo "No changes to commit"
           git push --force
