@@ -20,21 +20,22 @@ class FaselHDProvider : MainAPI() {
         }
     }
 
-    private fun Element.toSearchResponse(): MovieSearchResponse? {
-        val aTag = selectFirst("a") ?: return null
-        val href = fixUrl(aTag.attr("href"))
-        val img = selectFirst("img") ?: return null
-        val title = selectFirst("h3.Title")?.text()?.trim() ?: return null
-        val posterUrl = fixUrl(img.attr("data-src"))
+   private fun Element.toSearchResponse(): MovieSearchResponse? {
+    val aTag = selectFirst("a") ?: return null
+    val href = fixUrl(aTag.attr("href"))
+    val img = selectFirst("img") ?: return null
+    val title = selectFirst("h3.Title")?.text()?.trim() ?: return null
+    val posterUrl = fixUrl(img.attr("data-src"))
 
-        return newMovieSearchResponse {
-            this.name = title
-            this.url = href
-            this.apiName = this@FaselHDProvider.name
-            this.type = TvType.Movie
-            this.posterUrl = posterUrl
-        }
+    return newMovieSearchResponse {
+        this.name = title
+        this.url = href
+        this.apiName = this@FaselHDProvider.name
+        this.type = TvType.Movie
+        this.posterUrl = posterUrl
     }
+}
+
 
     private fun String.fixSearch(): String {
         return this.trim().replace(" ", "-")
