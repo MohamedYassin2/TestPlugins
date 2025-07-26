@@ -7,13 +7,13 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven("https://jitpack.io") // Cloudstream tools
+        maven("https://jitpack.io")
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.7.3")
+        classpath("com.android.tools.build:gradle:8.2.2") // الأفضل لتوافق Cloudstream
         classpath("com.github.recloudstream:gradle:-SNAPSHOT")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
     }
 }
 
@@ -40,10 +40,10 @@ subprojects {
         setRepo(System.getenv("GITHUB_REPOSITORY") ?: "user/repo")
     }
 
-    android {
+    extensions.configure<BaseExtension>("android") {
         namespace = "com.example"
 
-        compileSdkVersion(35) // ✅ في المكان الصحيح
+        compileSdkVersion(35)
 
         defaultConfig {
             minSdk = 21
@@ -54,16 +54,16 @@ subprojects {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
         }
+    }
 
-        tasks.withType<KotlinJvmCompile> {
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_1_8)
-                freeCompilerArgs.addAll(
-                    "-Xno-call-assertions",
-                    "-Xno-param-assertions",
-                    "-Xno-receiver-assertions"
-                )
-            }
+    tasks.withType<KotlinJvmCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+            freeCompilerArgs.addAll(
+                "-Xno-call-assertions",
+                "-Xno-param-assertions",
+                "-Xno-receiver-assertions"
+            )
         }
     }
 
