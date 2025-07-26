@@ -6,7 +6,7 @@ import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
 
 class FaselHDProvider : MainAPI() {
-    override var mainUrl = "https://web185.faselhd.cafe"
+    override var mainUrl = "https://faselhd.link"
     override var name = "FaselHD"
     override var lang = "ar"
     override val hasMainPage = false
@@ -28,9 +28,7 @@ class FaselHDProvider : MainAPI() {
         val title = selectFirst("h3.Title")?.text()?.trim() ?: return null
         val posterUrl = fixUrl(img.attr("data-src"))
 
-        return newMovieSearchResponse {
-            this.name = title
-            this.url = href
+        return newMovieSearchResponse(title, href) {
             this.apiName = this@FaselHDProvider.name
             this.type = TvType.Movie
             this.posterUrl = posterUrl
