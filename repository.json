@@ -3,6 +3,6 @@
   "description": "Plugin for FaselHD Movies",
   "manifestVersion": 1,
   "pluginLists": [
-    "https://raw.githubusercontent.com/MohamedYassin2/TestPlugins/builds/builds/plugins.json"
+    "https://raw.githubusercontent.com/MohamedYassin2/TestPlugins/builds/plugins.json"
   ]
 }
