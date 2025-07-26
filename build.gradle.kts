@@ -43,7 +43,7 @@ subprojects {
     android {
         namespace = "com.example"
 
-        compileSdkVersion(35) // ✅ هذا في المكان الصحيح الآن
+        compileSdkVersion(35) // ✅ في المكان الصحيح
 
         defaultConfig {
             minSdk = 21
