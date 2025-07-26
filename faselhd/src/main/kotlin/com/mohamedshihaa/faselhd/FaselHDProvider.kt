@@ -6,7 +6,7 @@ import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
 
 class FaselHDProvider : MainAPI() {
-    override var mainUrl = "https://faselhd.link"
+    override var mainUrl = "https://web185.faselhd.cafe"
     override var name = "FaselHD"
     override var lang = "ar"
     override val hasMainPage = false
