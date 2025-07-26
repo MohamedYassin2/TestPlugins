@@ -29,11 +29,11 @@ class FaselHDProvider : MainAPI() {
         val posterUrl = fixUrl(img.attr("data-src"))
 
         return newMovieSearchResponse {
-            name = title
-            url = href
+            this.name = title
+            this.url = href
             this.apiName = this@FaselHDProvider.name
-            type = TvType.Movie
-            posterUrl = posterUrl
+            this.type = TvType.Movie
+            this.posterUrl = posterUrl
         }
     }
 
