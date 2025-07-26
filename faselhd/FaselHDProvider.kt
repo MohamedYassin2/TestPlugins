@@ -41,3 +41,6 @@ class FaselHDProvider : MainAPI() {
         return this.trim().replace(" ", "-")
     }
 }
+// trigger build
+Trigger build for FaselHD provider
+
